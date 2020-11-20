@@ -1,4 +1,13 @@
 .places__place {
   display: flex;
   flex-flow: column;
+  width: 282px;
+  height: 361px;
+  margin: 0 0 20px;
+}
+
+@media only screen and (min-width: 625px) {
+  .places__place {
+    margin: 0 auto;
+  }
 }

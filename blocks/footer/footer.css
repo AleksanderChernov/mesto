@@ -1,0 +1,6 @@
+.footer {
+  display: flex;
+  flex-flow: row;
+  justify-content: left;
+  align-items: left;
+}

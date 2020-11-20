@@ -5,5 +5,15 @@
   line-height: 17px;
   color: #545454;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
-  margin: 48px 19px 36px;
+  margin: 0;
 }
+
+@media only screen and (min-width: 1100px) {
+  .footer__copyright {
+    align-items: flex-start;
+    margin-bottom: 27px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+

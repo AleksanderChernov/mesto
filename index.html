@@ -19,7 +19,7 @@
     <section class="profile">
       <div class="profile__wrapper">
         <div class="profile__avatar-block">
-          <img class="profile__avatar" src="images/profile/profile_image.jpg" alt="">
+          <img class="profile__avatar" src="images/profile/profile_image.jpg" alt="Ваш аватар">
         </div>
         <div class="profile__info">
           <div class="profile__name-box">
@@ -27,8 +27,8 @@
             <button class="profile__edit-button" onclick=""></button>
           </div>
           <p class="profile__occupation">Исследователь океана</p>
-          <button class="profile__add-button" onclick=""></button>
         </div>
+        <button class="profile__add-button" onclick=""></button>
       </div>
     </section>
     <section class="popup block-hidden">
@@ -46,55 +46,45 @@
         </form>
       </div>
     </section>
-    <section class="places">
+    <section class="places" aria-label="фотографии мест России">
       <div class="places__wrapper">
         <div class="places__place">
-          <img class="places__image" src="images/places/karachaevo_cherkessk.jpg" alt="">
+          <img class="places__image" src="images/places/karachaevo_cherkessk.jpg" alt="Храм в Карачаево-черкесске">
           <div class="places__info-block">
             <h2 class="places__title">Карачаево-Черкесск</h2>
             <button class="places__like-button"></button>
           </div>
         </div>
-      </div>
-      <div class="places__wrapper">
         <div class="places__place">
-          <img class="places__image" src="images/places/elbrus.png" alt="">
+          <img class="places__image" src="images/places/elbrus.png" alt="Гора Эльбрус вдалеке">
           <div class="places__info-block">
             <h2 class="places__title">Гора Эльбрус</h2>
             <button class="places__like-button"></button>
           </div>
         </div>
-      </div>
-      <div class="places__wrapper">
         <div class="places__place">
-          <img class="places__image" src="images/places/dombai.png" alt="">
+          <img class="places__image" src="images/places/dombai.png" alt="горный хребет Домбай">
           <div class="places__info-block">
             <h2 class="places__title">Домбай</h2>
             <button class="places__like-button"></button>
           </div>
         </div>
-      </div>
-      <div class="places__wrapper">
         <div class="places__place">
-          <img class="places__image" src="images/places/elbrus.png" alt="">
+          <img class="places__image" src="images/places/elbrus.png" alt="Гора Эльбрус вдалеке">
           <div class="places__info-block">
             <h2 class="places__title">Гора Эльбрус</h2>
             <button class="places__like-button"></button>
           </div>
         </div>
-      </div>
-      <div class="places__wrapper">
         <div class="places__place">
-          <img class="places__image" src="images/places/dombai.png" alt="">
+          <img class="places__image" src="images/places/dombai.png" alt="горный хребет Домбай">
           <div class="places__info-block">
             <h2 class="places__title">Домбай</h2>
             <button class="places__like-button"></button>
           </div>
         </div>
-      </div>
-      <div class="places__wrapper">
         <div class="places__place">
-          <img class="places__image" src="images/places/karachaevo_cherkessk.jpg" alt="">
+          <img class="places__image" src="images/places/karachaevo_cherkessk.jpg" alt="Храм в Карачаево-черкесске">
           <div class="places__info-block">
             <h2 class="places__title">Карачаево-Черкесск</h2>
             <button class="places__like-button"></button>
@@ -103,7 +93,9 @@
       </div>
     </section>
     <footer class="footer">
-      <p class="footer__copyright">© 2020 Mesto Russia</p>
+      <div class="footer__wrapper">
+        <p class="footer__copyright">© 2020 Mesto Russia</p>
+      </div>
     </footer>
   </main>
   <script src="/script/script.js"></script>
