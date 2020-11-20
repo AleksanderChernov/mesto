@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./pages/index.css">
-  <script src="/script/script.js"></script>
   <meta name="author" content="Aleksander Chernov">
   <title>Mesto</title>
 </head>
@@ -16,5 +15,97 @@
       </a>
     </div>
   </header>
+  <main class="content">
+    <section class="profile">
+      <div class="profile__wrapper">
+        <div class="profile__avatar-block">
+          <img class="profile__avatar" src="images/profile/profile_image.jpg" alt="">
+        </div>
+        <div class="profile__info">
+          <div class="profile__name-box">
+            <p class="profile__name">Жак-Ив Кусто</p>
+            <button class="profile__edit-button" onclick=""></button>
+          </div>
+          <p class="profile__occupation">Исследователь океана</p>
+          <button class="profile__add-button" onclick=""></button>
+        </div>
+      </div>
+    </section>
+    <section class="popup block-hidden">
+      <div class="popup__form-wrapper">
+        <button class="popup__close-button"></button>
+        <form class="popup__form" action="">
+          <h2 class="popup__title">Редактировать профиль</h2>
+            <div class="popup__form-box">
+              <input class="popup__name" type="text" value="">
+            </div>
+            <div class="popup__form-box">
+              <input class="popup__occupation" type="text" value="">
+            </div>
+          <input class="popup__save-button" type="submit" value="Сохранить">
+        </form>
+      </div>
+    </section>
+    <section class="places">
+      <div class="places__wrapper">
+        <div class="places__place">
+          <img class="places__image" src="images/places/karachaevo_cherkessk.jpg" alt="">
+          <div class="places__info-block">
+            <h2 class="places__title">Карачаево-Черкесск</h2>
+            <button class="places__like-button"></button>
+          </div>
+        </div>
+      </div>
+      <div class="places__wrapper">
+        <div class="places__place">
+          <img class="places__image" src="images/places/elbrus.png" alt="">
+          <div class="places__info-block">
+            <h2 class="places__title">Гора Эльбрус</h2>
+            <button class="places__like-button"></button>
+          </div>
+        </div>
+      </div>
+      <div class="places__wrapper">
+        <div class="places__place">
+          <img class="places__image" src="images/places/dombai.png" alt="">
+          <div class="places__info-block">
+            <h2 class="places__title">Домбай</h2>
+            <button class="places__like-button"></button>
+          </div>
+        </div>
+      </div>
+      <div class="places__wrapper">
+        <div class="places__place">
+          <img class="places__image" src="images/places/elbrus.png" alt="">
+          <div class="places__info-block">
+            <h2 class="places__title">Гора Эльбрус</h2>
+            <button class="places__like-button"></button>
+          </div>
+        </div>
+      </div>
+      <div class="places__wrapper">
+        <div class="places__place">
+          <img class="places__image" src="images/places/dombai.png" alt="">
+          <div class="places__info-block">
+            <h2 class="places__title">Домбай</h2>
+            <button class="places__like-button"></button>
+          </div>
+        </div>
+      </div>
+      <div class="places__wrapper">
+        <div class="places__place">
+          <img class="places__image" src="images/places/karachaevo_cherkessk.jpg" alt="">
+          <div class="places__info-block">
+            <h2 class="places__title">Карачаево-Черкесск</h2>
+            <button class="places__like-button"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <p class="footer__copyright">© 2020 Mesto Russia</p>
+    </footer>
+  </main>
+  <script src="/script/script.js"></script>
 </body>
 </html>

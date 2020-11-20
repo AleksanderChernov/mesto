@@ -1,0 +1,7 @@
+.places__like-button {
+  border: none;
+  background: url(../../../images/places/like-button.svg);
+  height: 18.13px;
+  width: 21px;
+  margin-right: 18px;
+}
