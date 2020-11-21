@@ -16,8 +16,6 @@
     background: url(../../../images/profile/add_button_150x50.svg) no-repeat;
     background-size: 150px 50px;
     margin:0 0 33px 245px;
-    align-self: center;
-    justify-content: end;
     width: 150px;
     height: 50px;
   }
