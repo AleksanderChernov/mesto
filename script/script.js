@@ -31,8 +31,8 @@ function refreshNames() {
 /* Открыть форму */
 function openEditorial() {
 
-  switchStateProfile.classList.add('block-hidden');
-  switchStatePopup.classList.remove('block-hidden');
+  switchStatePopup.classList.add('popup_state_opened');
+  switchStateProfile.classList.remove('popup_state_opened');
 
   nameInput.value = profileName.textContent;
   jobInput.value = profileOccupation.textContent;
@@ -43,8 +43,8 @@ function openEditorial() {
 /* Закрыть форму */
 function closeEditorial() {
 
-  switchStatePopup.classList.add('block-hidden');
-  switchStateProfile.classList.remove('block-hidden');
+  switchStatePopup.classList.remove('popup_state_opened');
+  switchStateProfile.classList.add('popup_state_opened');
 
   refreshNames();
 }
