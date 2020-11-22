@@ -1,0 +1,20 @@
+.profile__occupation {
+  color: white;
+  font-family: 'Inter',A rial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  width: 282px;
+  text-align: center;
+  margin: 0 19px 36px;
+}
+
+@media only screen and (min-width: 1100px) {
+  .profile__occupation {
+    font-size: 18px;
+    line-height: 22px;
+    text-align: left;
+    margin: 8px 0 9px;
+  }
+}

@@ -1,0 +1,12 @@
+ .places {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (min-width: 625px) {
+  .places {
+    margin: 0 auto;
+  }
+}

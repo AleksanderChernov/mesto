@@ -1,0 +1,21 @@
+.popup__form-box {
+  margin: 0 22px 25px;
+  width: 238px;
+  border: none;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+}
+
+.popup__form-box:nth-child(3n) {
+  margin-bottom: 46px;
+}
+
+@media only screen and (min-width: 1100px) {
+  .popup__form-box {
+    margin: 0 36px 25px;
+    width: 358px;
+  }
+
+  .popup__form-box:nth-child(3n) {
+    margin-bottom: 49px;
+  }
+}

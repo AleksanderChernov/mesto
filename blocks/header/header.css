@@ -1,0 +1,17 @@
+.header {
+  margin: 0;
+}
+
+@media only screen and (min-width: 625px) {
+  .header {
+    margin: 0 auto;
+    width: 575px;
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  .header {
+    margin: 0 auto;
+    width: 885px;
+  }
+}

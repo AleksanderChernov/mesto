@@ -1,0 +1,9 @@
+.places__info-block {
+  background-color: white;
+  display: flex;
+  flex-flow: row nowrap;
+  border-radius: 0 0 10px 10px;
+  justify-content: space-between;
+  align-items: center;
+  width: 282px;
+}

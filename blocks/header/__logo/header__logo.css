@@ -1,0 +1,16 @@
+.header__logo {
+  margin: 0 0 26px 27px;
+}
+
+.header__logo:hover {
+  opacity: 0.6;
+  transition: opacity .35s ease-in-out;
+}
+
+@media only screen and (min-width: 1100px) {
+  .header__logo {
+    margin: 16px 0 37px 0;
+    width: 145px;
+    height: 34px;
+  }
+}
