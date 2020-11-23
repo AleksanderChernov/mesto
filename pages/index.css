@@ -12,7 +12,6 @@
 
 /* Header */
 @import url(../blocks/header/header.css);
-@import url(../blocks/header/__wrapper/header__wrapper.css);
 @import url(../blocks/header/__link/header__link.css);
 @import url(../blocks/header/__logo/header__logo.css);
 
@@ -22,7 +21,6 @@
 @import url(../blocks/profile/__wrapper/profile__wrapper.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
-@import url(../blocks/profile/__avatar-block/profile__avatar-block.css);
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__occupation/profile__occupation.css);
@@ -30,26 +28,26 @@
 
 /* Popup */
 @import url(../blocks/popup/popup.css);
-@import url(../blocks/popup/__name/popup__name.css);
-@import url(../blocks/popup/__occupation/popup__occupation.css);
 @import url(../blocks/popup/__save-button/popup__save-button.css);
 @import url(../blocks/popup/__close-button/popup__close-button.css);
 @import url(../blocks/popup/__title/popup__title.css);
-@import url(../blocks/popup/__form-box/popup__form-box.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/_state/popup_state_opened.css);
+@import url(../blocks/popup/__input/popup__input.css);
+@import url(../blocks/popup/__input/_entity/popup__input_entity_name.css);
+@import url(../blocks/popup/__input/_entity/popup__input_entity_occupation.css);
 
 /* Places */
 @import url(../blocks/places/places.css);
-@import url(../blocks/places/__image/places__image.css);
-@import url(../blocks/places/__info-block/places__info-block.css);
-@import url(../blocks/places/__like-button/places__like-button.css);
-@import url(../blocks/places/__title/places__title.css);
-@import url(../blocks/places/__wrapper/places__wrapper.css);
-@import url(../blocks/places/__place/places__place.css);
+
+/* Cards */
+@import url(../blocks/cards/__image/cards__image.css);
+@import url(../blocks/cards/__info-block/cards__info-block.css);
+@import url(../blocks/cards/__like-button/cards__like-button.css);
+@import url(../blocks/cards/__title/cards__title.css);
+@import url(../blocks/cards/cards.css);
 
 /* Footer */
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
-@import url(../blocks/footer/__wrapper/footer__wrapper.css);
