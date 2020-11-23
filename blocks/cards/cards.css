@@ -1,13 +1,12 @@
-.places__place {
+.cards {
   display: flex;
   flex-flow: column;
   width: 282px;
-  height: 361px;
   margin: 0 0 20px;
 }
 
 @media only screen and (min-width: 625px) {
-  .places__place {
+  .cards {
     margin: 0 auto;
   }
 }
