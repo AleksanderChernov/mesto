@@ -13,8 +13,8 @@ let switchStatePopup = document.querySelector('.popup');
 let saveInfo = document.querySelector('.popup__save-button');
 
 /* Поля формы */
-let nameInput = document.querySelector('.popup_input_entity_name');
-let jobInput = document.querySelector('.popup_input_entity_occupation');
+let nameInput = document.querySelector('.popup__input_entity_name');
+let jobInput = document.querySelector('.popup__input_entity_occupation');
 
 /* Параметры в профиле */
 let profileName = document.querySelector('.profile__name');
