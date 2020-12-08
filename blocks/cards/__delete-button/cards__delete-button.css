@@ -1,0 +1,13 @@
+.cards__delete-button {
+ background: url(../../../images/cards/trashcan.svg) no-repeat;
+ position: absolute;
+ width: 18px;
+ height: 19px;
+ border: none;
+ top: 18px;
+ right: 15px;
+}
+
+.cards__delete-button:hover {
+  opacity: 0.5;
+}

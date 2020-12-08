@@ -28,23 +28,38 @@
 
 /* Popup */
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_entity/popup_places.css);
+@import url(../blocks/popup/_entity/popup_images.css);
+@import url(../blocks/popup/_state/popup_state_opened.css);
 @import url(../blocks/popup/__save-button/popup__save-button.css);
+@import url(../blocks/popup/__save-button/_place/popup_save-button_place.css);
 @import url(../blocks/popup/__close-button/popup__close-button.css);
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__form/popup__form.css);
-@import url(../blocks/popup/_state/popup_state_opened.css);
+@import url(../blocks/popup/__form/_entity/popup__form_places.css);
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__input/_entity/popup__input_entity_name.css);
 @import url(../blocks/popup/__input/_entity/popup__input_entity_occupation.css);
+@import url(../blocks/popup/__input/_entity/popup__input_entity_place.css);
+@import url(../blocks/popup/__input/_entity/popup__input_entity_url.css);
+@import url(../blocks/popup/__modal-image/popup__modal-image.css);
+@import url(../blocks/popup/__modal-name/popup__modal-name.css);
+@import url(../blocks/popup/__modal-container/popup__modal-container.css);
 
 /* Places */
 @import url(../blocks/places/places.css);
+
+/* Template */
+@import url(../blocks/template/template.css);
+@import url(../blocks/template/__slot/template__slot.css);
 
 /* Cards */
 @import url(../blocks/cards/__image/cards__image.css);
 @import url(../blocks/cards/__info-block/cards__info-block.css);
 @import url(../blocks/cards/__like-button/cards__like-button.css);
+@import url(../blocks/cards/__delete-button/cards__delete-button.css);
+@import url(../blocks/cards/__like-button/_pressed/cards__like-button_pressed.css);
 @import url(../blocks/cards/__title/cards__title.css);
 @import url(../blocks/cards/cards.css);
 

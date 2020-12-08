@@ -1,0 +1,14 @@
+.popup__modal-container {
+  margin: 136px 40px 133px;
+  position: absolute;
+  top: 0;
+}
+
+@media only screen and (min-width: 500px) {
+  .popup__modal-container {
+    margin: 90px 423px;
+  }
+}
+
+
+
