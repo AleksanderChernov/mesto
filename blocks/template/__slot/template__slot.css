@@ -1,0 +1,25 @@
+ .template__slot {
+   display: flex;
+   flex-flow: column;
+   justify-content: center;
+   align-items: center;
+ }
+
+ @media only screen and (min-width: 625px) {
+   .template__slot {
+     width: 590px;
+     margin: 0 auto 68px;
+     display: grid;
+     gap: 15px;
+     grid-template-columns: repeat(2, 1fr);
+   }
+ }
+
+ @media only screen and (min-width: 1280px) {
+   .template__slot {
+     width: 880px;
+     row-gap: 21px;
+     column-gap: 17px;
+     grid-template-columns: repeat(3, 1fr);
+   }
+ }
