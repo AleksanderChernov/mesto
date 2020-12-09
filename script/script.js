@@ -141,12 +141,13 @@ function workingWithForm () {
 function pushCard(card) {
   let clonedCard = template.content.cloneNode(true);
 
-  let cardsTitle = clonedCard.querySelector('.cards__title');
-  let cardsImage = clonedCard.querySelector('.cards__image');
+  const cardsTitle = clonedCard.querySelector('.cards__title');
+  const cardsImage = clonedCard.querySelector('.cards__image');
 
-  /* Ставим название и ссылку */
+  /* Ставим название и ссылку + alt*/
   cardsTitle.textContent = card.name;
   cardsImage.src = card.link;
+  cardsImage.alt = cardsTitle.textContent;
 
   /* Работа с лайком */
   clonedCard.querySelector('.cards__like-button').addEventListener('click', function(evt){
@@ -159,9 +160,8 @@ function pushCard(card) {
   })
 
   /* Увеличиваем картинку */
-
-  let modalImage = document.querySelector('.popup__modal-image');
-  let modalName = document.querySelector('.popup__modal-name');
+  const modalImage = document.querySelector('.popup__modal-image');
+  const modalName = document.querySelector('.popup__modal-name');
 
   cardsImage.addEventListener('click', function(){
     modalImage.src = cardsImage.src;
