@@ -52,7 +52,7 @@
 
 /* Template */
 @import url(../blocks/template/template.css);
-@import url(../blocks/template/__slot/template__slot.css);
+@import url(../blocks/template-slot/template-slot.css);
 
 /* Cards */
 @import url(../blocks/cards/__image/cards__image.css);

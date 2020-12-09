@@ -31,7 +31,7 @@ let profileOccupation = document.querySelector('.profile__occupation');
 
 /* Template */
 let template = document.querySelector('.template');
-let templateSlot = document.querySelector('.template__slot');
+let templateSlot = document.querySelector('.template-slot');
 
 /* Открыть форму профиля*/
 function openEditorial() {
@@ -43,17 +43,17 @@ function openEditorial() {
 
 }
 
-/* Открыть модальное окно */
-function openModal () {
-
-  switchStateModal.classList.add('popup_state_opened');
-
-}
-
 /* Открываем форму работы с изображениями */
 function openEditorialPlaces() {
 
   switchStatePopupPlaces.classList.add('popup_state_opened');
+
+}
+
+/* Открыть модальное окно */
+function openModal () {
+
+  switchStateModal.classList.add('popup_state_opened');
 
 }
 
@@ -156,7 +156,6 @@ function pushCard(card) {
   /* Удаляем карточку */
   clonedCard.querySelector('.cards__delete-button').addEventListener('click', function(evt){
     evt.target.closest('.cards').remove();
-    console.log(evt.target);
   })
 
   /* Увеличиваем картинку */
@@ -187,7 +186,6 @@ openPopupPlaces.addEventListener('click', openEditorialPlaces);
 
 
 /* Слушаем сохранение информации */
-
 formElement.addEventListener('submit', formSubmitHandler);
 formElementPlaces.addEventListener('submit', formSubmitHandlerPlaces);
 
