@@ -36,34 +36,28 @@ let templateSlot = document.querySelector('.template-slot');
 /* Открыть форму профиля*/
 function openEditorial() {
 
-  switchStatePopup.classList.add('popup_state_opened');
+  /* switchStatePopup.classList.add('popup_state_opened'); */
 
+  openThisPopup(switchStatePopup);
   nameInput.value = profileName.textContent;
   jobInput.value = profileOccupation.textContent;
 
 }
 
-/* Открываем форму работы с изображениями */
-function openEditorialPlaces() {
+/* Открываем определенный попап */
+function openThisPopup (node) {
 
-  switchStatePopupPlaces.classList.add('popup_state_opened');
-
-}
-
-/* Открыть модальное окно */
-function openModal () {
-
-  switchStateModal.classList.add('popup_state_opened');
+  node.classList.add('popup_state_opened');
 
 }
 
 /* Закрыть форму */
 function closeEditorial() {
 
-  switchStatePopupPlaces.classList.remove('popup_state_opened');
-  switchStatePopup.classList.remove('popup_state_opened');
-  switchStateModal.classList.remove('popup_state_opened');
-
+  document.querySelectorAll('.popup').forEach(remove);
+  function remove(node) {
+    node.classList.remove('popup_state_opened');
+  }
 }
 
 /* Вынесли функцию из сохранения */
@@ -166,7 +160,7 @@ function pushCard(card) {
   cardsImage.addEventListener('click', function(){
     modalImage.src = cardsImage.src;
     modalName.textContent = cardsTitle.textContent;
-    openModal()
+    openThisPopup(switchStateModal);
   });
 
   templateSlot.prepend(clonedCard);
@@ -174,16 +168,16 @@ function pushCard(card) {
   return clonedCard;
 }
 
+/* Слушаем открыть-закрыть форму */
+openPopup.addEventListener('click', openEditorial);
+openPopupPlaces.addEventListener('click', ()=> {
+  openThisPopup(switchStatePopupPlaces);
+});
 
 /* Закрываем формы */
 for (let i = 0 ; i < closePopup.length; i++) {
-  closePopup[i].addEventListener('click', closeEditorial) ;
-}
-
-/* Слушаем открыть-закрыть форму */
-openPopup.addEventListener('click', openEditorial);
-openPopupPlaces.addEventListener('click', openEditorialPlaces);
-
+  closePopup[i].addEventListener('click',closeEditorial);
+};
 
 /* Слушаем сохранение информации */
 formElement.addEventListener('submit', formSubmitHandler);
