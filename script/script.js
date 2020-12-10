@@ -70,7 +70,7 @@ function changeProfile() {
 function formSubmitHandler (evt) {
   evt.preventDefault();
   changeProfile();
-  closeEditorial(switchStatePopup);
+  closeEditorial(switchStatePopup[0]);
 }
 
 /* Работа с формой places*/
