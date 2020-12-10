@@ -9,7 +9,7 @@ const closePopup = document.querySelectorAll('.popup__close-button');
 
 /* Профиль-Попап */
 const switchStateProfile = document.querySelector('.profile__wrapper');
-const switchStatePopup = document.querySelectorAll('.popup');
+const switchStatePopup = document.querySelector('.popup');
 
 /* Places-Попап */
 let switchStatePopupPlaces = document.querySelector('.popup_places');
@@ -40,7 +40,7 @@ const urlInputPlaces = document.querySelector('.popup__input_entity_url').value;
 /* Открыть форму профиля*/
 function openEditorial() {
 
-  openPopup(switchStatePopup[0]);
+  openPopup(switchStatePopup);
   nameInput.value = profileName.textContent;
   jobInput.value = profileOccupation.textContent;
 
@@ -70,7 +70,7 @@ function changeProfile() {
 function formSubmitHandler (evt) {
   evt.preventDefault();
   changeProfile();
-  closeEditorial(switchStatePopup[0]);
+  closeEditorial(switchStatePopup);
 }
 
 /* Работа с формой places*/
@@ -85,19 +85,20 @@ function handleAddCardFormSubmit (evt) {
   pushCard(cardData);
   formElementPlaces.reset();
   closeEditorial(switchStatePopupPlaces);
+  console.log('change')
 }
 
 /* Создаем информацию карты */
 function createCard(cardData) {
 
-  let clonedCard = template.content.cloneNode(true);
+  const clonedCard = template.content.cloneNode(true);
   const cardsTitle = clonedCard.querySelector('.cards__title');
   const cardsImage = clonedCard.querySelector('.cards__image');
 
   /* Ставим название и ссылку + alt*/
   cardsTitle.textContent = cardData.name;
   cardsImage.src = cardData.link;
-  cardsImage.alt = cardsTitle.textContent;
+  cardsImage.alt = cardData.textContent;
 
   /* Работа с лайком */
   clonedCard.querySelector('.cards__like-button').addEventListener('click', function(evt){
@@ -119,13 +120,13 @@ function createCard(cardData) {
     openPopup(switchStateModal);
   });
 
-  templateSlot.prepend(clonedCard);
-  return clonedCard
+  console.log(clonedCard);
+  return clonedCard;
 }
 
 /* Рендер карточек в places */
 function pushCard(cardData) {
-  createCard(cardData);
+  templateSlot.prepend(createCard(cardData));
 }
 
 /* Отрисовываем стартовые */
@@ -140,9 +141,11 @@ openPopupPlaces.addEventListener('click', ()=> {
   openPopup(switchStatePopupPlaces);
 });
 
+const switchStatePopupAll = document.querySelectorAll('.popup');
+
 for (let i = 0 ; i < closePopup.length; i++) {
   closePopup[i].addEventListener('click', ()=>{
-    switchStatePopup.forEach(closeEditorial);
+    switchStatePopupAll.forEach(closeEditorial);
   })
 };
 
