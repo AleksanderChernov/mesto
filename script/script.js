@@ -31,11 +31,11 @@ const profileOccupation = document.querySelector('.profile__occupation');
 
 /* Template */
 const template = document.querySelector('.template');
-const templateSlot = document.querySelector('.template-slot');
+let templateSlot = document.querySelector('.template-slot');
 
 /* Поля формы редактирования карточек */
-const nameInputPlaces = document.querySelector('.popup__input_entity_place').value;
-const urlInputPlaces = document.querySelector('.popup__input_entity_url').value;
+const nameInputPlaces = document.querySelector('.popup__input_entity_place');
+const urlInputPlaces = document.querySelector('.popup__input_entity_url');
 
 /* Открыть форму профиля*/
 function openEditorial() {
@@ -77,16 +77,25 @@ function formSubmitHandler (evt) {
 function handleAddCardFormSubmit (evt) {
 
   const cardData = {
-    name: nameInputPlaces,
-    link: urlInputPlaces,
+    name: nameInputPlaces.value,
+    link: urlInputPlaces.value,
   }
 
   evt.preventDefault();
-  pushCard(cardData);
+  templateSlot.prepend(createCard(cardData));
   formElementPlaces.reset();
   closeEditorial(switchStatePopupPlaces);
-  console.log('change')
 }
+
+/* Отрисовываем стартовые */
+function renderCards() {
+
+  let cardsRemoldered = initialCards.map(createCard);
+  console.log(cardsRemoldered);
+  templateSlot.prepend(...cardsRemoldered);
+}
+
+renderCards();
 
 /* Создаем информацию карты */
 function createCard(cardData) {
@@ -98,7 +107,7 @@ function createCard(cardData) {
   /* Ставим название и ссылку + alt*/
   cardsTitle.textContent = cardData.name;
   cardsImage.src = cardData.link;
-  cardsImage.alt = cardData.textContent;
+  cardsImage.alt = cardData.name;
 
   /* Работа с лайком */
   clonedCard.querySelector('.cards__like-button').addEventListener('click', function(evt){
@@ -120,20 +129,9 @@ function createCard(cardData) {
     openPopup(switchStateModal);
   });
 
-  console.log(clonedCard);
   return clonedCard;
-}
 
-/* Рендер карточек в places */
-function pushCard(cardData) {
-  templateSlot.prepend(createCard(cardData));
 }
-
-/* Отрисовываем стартовые */
-function renderCards() {
-  initialCards.map(pushCard);
-}
-renderCards();
 
 /* Слушаем открыть-закрыть форму */
 openPopupProfile.addEventListener('click', openEditorial);
