@@ -141,6 +141,24 @@ popupCloseButtons.forEach((item)=>{
   })
 });
 
+/* Закрываем на esc */
+document.addEventListener('keydown', (evt)=> {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_state_opened');
+    closePopup(openedPopup);
+  }
+})
+
+/* Закрываем по клику на оерлей */
+document.addEventListener('click', (evt)=>{
+  const clickedElem = evt.target;
+  if (!clickedElem.classList.contains('popup_state_opened')) {
+    return
+  } else {
+    clickedElem.closest('.popup').classList.remove('popup_state_opened');
+  }
+})
+
 /* Слушаем сохранение информации */
 formElementProfile.addEventListener('submit', handleProfileSubmit);
 formElementPlaces.addEventListener('submit', handleAddCardFormSubmit);
