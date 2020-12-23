@@ -107,6 +107,7 @@ function createCard(cardData) {
 /* Работа с формой places*/
 function handleAddCardFormSubmit (evt) {
 
+  const placesSaveButton = formElementPlaces.querySelector('.popup__save-button');
   const cardData = {
     name: nameInputPlaces.value,
     link: urlInputPlaces.value,
@@ -115,6 +116,7 @@ function handleAddCardFormSubmit (evt) {
   evt.preventDefault();
   cardsContainer.prepend(createCard(cardData));
   formElementPlaces.reset();
+  setButtonState(placesSaveButton, false, validationConfig);
   closePopup(cardPopup);
 }
 
