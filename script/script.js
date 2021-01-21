@@ -1,33 +1,6 @@
 import {Card} from './card.js';
-import {Validation} from './validation.js';
-
-/* Стартовые карточки */
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
+import Validation from './validation.js';
+import {initialCards} from './initial-cards.js';
 
 /* Выбираем форму */
 const formElementProfile = document.querySelector('.popup__form_profile');
@@ -78,6 +51,13 @@ const config = {
   errorClass: '.popup__error_visible'
 };
 
+/* Валидируем профиль */
+const profileChecker = new Validation(config, formElementProfile);
+profileChecker.enableValidation();
+
+/* Валидируем карточки */
+const placesChecker = new Validation(config, formElementPlaces);
+placesChecker.enableValidation();
 
 /* Попап картинки */
 function imagePopupOpen(src, name) {
@@ -90,7 +70,6 @@ function imagePopupOpen(src, name) {
   openPopup(imagePopup);
 }
 
-
 initialCards.forEach((item) => {
 	const card = new Card(item, template, imagePopupOpen);
   const cardElement = card.generateCard();
@@ -100,21 +79,15 @@ initialCards.forEach((item) => {
 /* Открыть форму профиля*/
 function openProfilePopup() {
 
-  const profileChecker = new Validation(config, formElementProfile);
-
-  profileChecker.enableValidation();
-
-  profileChecker.setButtonState(saveButton, false);
+  profileChecker.setButtonState(false);
 
   openPopup(profilePopup);
   nameInput.value = profileName.textContent;
   jobInput.value = profileOccupation.textContent;
 
-  profileChecker.checkValidity(formElementProfile, nameInput);
+  profileChecker.clearValidation();
 
-  profileChecker.checkValidity(formElementProfile, jobInput);
-
-  profileChecker.setButtonState(saveButton, true);
+  profileChecker.setButtonState(true);
 
 }
 
@@ -164,7 +137,7 @@ function handleAddCardFormSubmit (evt) {
   cardsContainer.prepend(cardElement);
   closePopup(cardPopup);
   formElementPlaces.reset();
-  /* placesChecker.setButtonState(placesSaveButton, false); */
+  placesChecker.setButtonState(false);
 }
 
 /* Закрываем на esc */
@@ -190,21 +163,9 @@ profilePopupOpenButton.addEventListener('click', openProfilePopup);
 
 profilePlacesOpenButton.addEventListener('click', ()=> {
 
-  const placesChecker = new Validation(config, formElementPlaces);
-
-  placesChecker.enableValidation();
-
-  /* placesChecker.setButtonState(placesSaveButton, false); */
+  placesChecker.highlightErrors();
 
   openPopup(cardPopup);
-
-  placesChecker.hideError(formElementPlaces, nameInputPlaces);
-
-  placesChecker.hideError(formElementPlaces, urlInputPlaces);
-
-  placesChecker.showError(formElementPlaces, nameInputPlaces);
-
-  placesChecker.showError(formElementPlaces, urlInputPlaces);
 
 });
 
