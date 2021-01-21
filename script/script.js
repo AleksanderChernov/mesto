@@ -1,3 +1,34 @@
+import {Card} from './card.js';
+import {Validation} from './validation.js';
+
+/* Стартовые карточки */
+const initialCards = [
+    {
+        name: 'Архыз',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+        name: 'Челябинская область',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+        name: 'Иваново',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+        name: 'Камчатка',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+        name: 'Холмогорский район',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+        name: 'Байкал',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+];
+
 /* Выбираем форму */
 const formElementProfile = document.querySelector('.popup__form_profile');
 const formElementPlaces = document.querySelector('.popup__form_places');
@@ -35,12 +66,55 @@ const urlInputPlaces = document.querySelector('.popup__input_entity_url');
 /* Кнопка сохранения в форме для изображений */
 const placesSaveButton = formElementPlaces.querySelector('.popup__save-button');
 
+/* Save */
+const saveButton = document.querySelector('.popup__save-button');
+
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_disabled',
+  inputErrorClass: '.popup__input_type_error',
+  errorClass: '.popup__error_visible'
+};
+
+
+/* Попап картинки */
+function imagePopupOpen(src, name) {
+  const modalImage = document.querySelector('.popup__modal-image');
+  const modalName = document.querySelector('.popup__modal-name');
+
+  modalImage.src = src;
+  modalName.textContent = name;
+  modalImage.alt = name;
+  openPopup(imagePopup);
+}
+
+
+initialCards.forEach((item) => {
+	const card = new Card(item, template, imagePopupOpen);
+  const cardElement = card.generateCard();
+	cardsContainer.append(cardElement);
+});
+
 /* Открыть форму профиля*/
 function openProfilePopup() {
+
+  const profileChecker = new Validation(config, formElementProfile);
+
+  profileChecker.enableValidation();
+
+  profileChecker.setButtonState(saveButton, false);
 
   openPopup(profilePopup);
   nameInput.value = profileName.textContent;
   jobInput.value = profileOccupation.textContent;
+
+  profileChecker.checkValidity(formElementProfile, nameInput);
+
+  profileChecker.checkValidity(formElementProfile, jobInput);
+
+  profileChecker.setButtonState(saveButton, true);
 
 }
 
@@ -55,7 +129,6 @@ function openPopup(node) {
 
 /* Закрыть форму */
 function closePopup(node) {
-
   node.classList.remove('popup_state_opened');
   document.removeEventListener('keydown', escClose);
   document.removeEventListener('click', overlayClose);
@@ -75,43 +148,6 @@ function handleProfileSubmit (evt) {
   closePopup(profilePopup);
 }
 
-/* Создаем информацию карты */
-function createCard(cardData) {
-
-  const clonedCard = template.content.cloneNode(true);
-  const cardsTitle = clonedCard.querySelector('.cards__title');
-  const cardsImage = clonedCard.querySelector('.cards__image');
-
-  /* Ставим название и ссылку + alt*/
-  cardsTitle.textContent = cardData.name;
-  cardsImage.src = cardData.link;
-  cardsImage.alt = cardData.name;
-
-  /* Работа с лайком */
-  clonedCard.querySelector('.cards__like-button').addEventListener('click', function(evt){
-    evt.target.classList.toggle('cards__like-button_pressed');
-  });
-
-  /* Удаляем карточку */
-  clonedCard.querySelector('.cards__delete-button').addEventListener('click', function(evt){
-    evt.target.closest('.cards').remove();
-  });
-
-  /* Увеличиваем картинку */
-  const modalImage = document.querySelector('.popup__modal-image');
-  const modalName = document.querySelector('.popup__modal-name');
-
-  cardsImage.addEventListener('click', function(){
-    modalImage.src = cardsImage.src;
-    modalName.textContent = cardsTitle.textContent;
-    modalImage.alt = cardsTitle.textContent;
-    openPopup(imagePopup);
-  });
-
-  return clonedCard;
-
-}
-
 /* Работа с формой places*/
 function handleAddCardFormSubmit (evt) {
 
@@ -121,22 +157,15 @@ function handleAddCardFormSubmit (evt) {
   }
 
   evt.preventDefault();
-  cardsContainer.prepend(createCard(cardData));
-  formElementPlaces.reset();
-  setButtonState(placesSaveButton, false, validationConfig);
+
+  const card = new Card(cardData, template, imagePopupOpen);
+  const cardElement = card.generateCard();
+
+  cardsContainer.prepend(cardElement);
   closePopup(cardPopup);
+  formElementPlaces.reset();
+  /* placesChecker.setButtonState(placesSaveButton, false); */
 }
-
-/* Отрисовываем стартовые */
-function renderCards(cards, position) {
-
-  const cardsRemouldered = cards.map(createCard);
-  position.prepend(...cardsRemouldered);
-
-}
-
-renderCards(initialCards, cardsContainer);
-
 
 /* Закрываем на esc */
 function escClose (evt) {
@@ -146,7 +175,7 @@ function escClose (evt) {
   }
 }
 
-/* Закрываем по клику на оерлей */
+/* Закрываем по клику на оверлей */
 function overlayClose (evt) {
   const clickedElem = evt.target;
   if (!clickedElem.classList.contains('popup_state_opened')) {
@@ -158,8 +187,25 @@ function overlayClose (evt) {
 
 /* Слушаем открыть-закрыть форму */
 profilePopupOpenButton.addEventListener('click', openProfilePopup);
+
 profilePlacesOpenButton.addEventListener('click', ()=> {
+
+  const placesChecker = new Validation(config, formElementPlaces);
+
+  placesChecker.enableValidation();
+
+  /* placesChecker.setButtonState(placesSaveButton, false); */
+
   openPopup(cardPopup);
+
+  placesChecker.hideError(formElementPlaces, nameInputPlaces);
+
+  placesChecker.hideError(formElementPlaces, urlInputPlaces);
+
+  placesChecker.showError(formElementPlaces, nameInputPlaces);
+
+  placesChecker.showError(formElementPlaces, urlInputPlaces);
+
 });
 
 popupCloseButtons.forEach((item)=>{
