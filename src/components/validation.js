@@ -7,7 +7,7 @@ export default class Validation {
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass;
     this._submitButton = this._form.querySelector(this._submitButtonSelector);
-    this._inputSelector = this._form.querySelectorAll(this._inputSelector);
+    this._inputs = this._form.querySelectorAll(this._inputSelector);
   }
 
   _showError (input) {
@@ -26,13 +26,13 @@ export default class Validation {
   }
 
   clearValidation() {
-    this._inputSelector.forEach(field => {
+    this._inputs.forEach(field => {
       this._hideError(field);
     })
   }
 
   highlightErrors() {
-    this._inputSelector.forEach(field => {
+    this._inputs.forEach(field => {
       this._showError(field);
     })
   }
@@ -58,7 +58,7 @@ export default class Validation {
 
   _setEventListener() {
 
-    this._inputSelector.forEach(input => {
+    this._inputs.forEach(input => {
       input.addEventListener('input', (evt)=>{
         this._checkValidity(input);
         this.setButtonState(this._form.checkValidity());
