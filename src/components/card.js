@@ -1,10 +1,10 @@
 class Card {
-  constructor (data, template, imagePopupOpen) {
+  constructor (data, template, handleCardClick) {
 
     this._name = data.name;
     this._link = data.link;
     this._template = template;
-    this._showPopup = imagePopupOpen;
+    this._showPopup = handleCardClick;
 
   }
 
@@ -20,6 +20,7 @@ class Card {
   _delete(e) {
     e.target.closest('.cards').remove();
   }
+
 
   _setEventListeners() {
 
@@ -39,7 +40,6 @@ class Card {
     this._element.querySelector('.cards__image').src = this._link;
     this._element.querySelector('.cards__title').textContent = this._name;
     this._element.querySelector('.cards__image').alt = this._name;
-
     this._setEventListeners();
     return this._element;
   }

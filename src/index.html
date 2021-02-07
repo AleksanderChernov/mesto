@@ -3,20 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <meta name="author" content="Aleksander Chernov">
   <title>Mesto</title>
 </head>
 <body class="page">
   <header class="header">
     <a class="header__link" href="#" target="_blank">
-      <img class="header__logo" src="./images/logo/logo.svg" alt="Лого Место">
+      <img class="header__logo" src="<%=require('../src/images/logo/logo.svg')%>" alt="Лого Место">
     </a>
   </header>
   <main class="content">
     <section class="profile" aria-label="Профиль">
       <div class="profile__wrapper">
-          <img class="profile__avatar" src="images/profile/profile_image.jpg" alt="Ваш аватар">
+          <img class="profile__avatar" src="<%=require('../src/images/profile/profile_image.jpg')%>" alt="Ваш аватар">
         <div class="profile__info">
           <div class="profile__name-box">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -49,9 +48,9 @@
         <button class="popup__close-button" type="button"></button>
         <form class="popup__form popup__form_places" action="nothing_for_now" name="popupFormPlaces" novalidate>
           <h2 class="popup__title">Новое место</h2>
-          <input class="popup__input popup__input_entity_place" id="place-input" name="placeInput" type="text" value="" placeholder="Название" minlength="2" maxlength="30" required>
+          <input class="popup__input popup__input_entity_place" id="place-input" name="name" type="text" value="" placeholder="Название" minlength="2" maxlength="30" required>
           <span class="popup__error" id="place-input-error"></span>
-          <input class="popup__input popup__input_entity_url" id="place-url" name="urlInput" type="url" value="" placeholder="Ссылка на картинку" required>
+          <input class="popup__input popup__input_entity_url" id="place-url" name="link" type="url" value="" placeholder="Ссылка на картинку" required>
           <span class="popup__error" id="place-url-error"></span>
           <button class="popup__save-button popup__save-button_place" type="submit">Сохранить</button>
         </form>
@@ -83,6 +82,5 @@
     </article>
   </template>
 
-  <script type="module" src="script/script.js"></script>
 </body>
 </html>
