@@ -10,21 +10,23 @@ import UserInfo from '../src/components/UserInfo.js'
 import {initialCards, config, formElementProfile, formElementPlaces, profilePopupOpenButton, profilePlacesOpenButton,
 profilePopup, cardPopup, imagePopup, nameInput, jobInput, profileName, profileOccupation, template, section} from '../src/utils/constants.js';
 
+const modalImagePopup = new PopupWithImage(imagePopup);
+modalImagePopup.setEventListeners();
+
+function recreateNewCard (item){
+  const card = new Card(item, template, ()=>{
+    modalImagePopup.open(item);
+  });
+  const cardElement = card.generateCard();
+  cardList.addItem(cardElement);
+}
 
 /* Секция для карточек + стартовые */
 const cardList = new Section({
   items: initialCards,
-  renderer: (item) => {
-    const card = new Card(item, template, ()=>{
-      const modalImagePopup = new PopupWithImage(imagePopup);
-      modalImagePopup.open(item);
-      modalImagePopup.setEventListeners();
-    });
-    const cardElement = card.generateCard();
-    cardList.addItem(cardElement);
-    },
+  renderer: (item) => {recreateNewCard(item)},
   },
-  section);
+section);
 
 cardList.renderItems();
 
@@ -43,15 +45,7 @@ profileForm.setEventListeners();
 
 /* Создаем новые карточки */
 const placesForm = new PopupWithForm(cardPopup, {
-  handleFormSubmit: (item) => {
-    const card = new Card(item, template, ()=>{
-      const modalImagePopup = new PopupWithImage(imagePopup);
-      modalImagePopup.open(item);
-      modalImagePopup.setEventListeners();
-    });
-    const cardElement = card.generateCard();
-    cardList.addItem(cardElement);
-    },
+  handleFormSubmit: (item) => {recreateNewCard (item)},
   },
   section);
 placesForm.setEventListeners();
@@ -77,6 +71,5 @@ profilePopupOpenButton.addEventListener('click', ()=>{
 /* Открываем форму картинок */
 profilePlacesOpenButton.addEventListener('click', ()=> {
   placesChecker.setButtonState(false);
-  placesChecker.highlightErrors();
   placesForm.open();
 });
