@@ -1,5 +1,6 @@
 class Card {
   constructor (data, template, handleCardClick) {
+    console.log(data);
     this._name = data.name;
     this._link = data.link;
     this._template = template;
