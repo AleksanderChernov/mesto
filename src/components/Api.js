@@ -18,6 +18,16 @@ export default class Api {
     })
   }
 
+  changeAvatar(avatar) {
+    return fetch(`${this._url}/users/me/avatar`, {
+      headers: this._headers,
+      method: 'PATCH',
+      body: JSON.stringify({
+        avatar: avatar
+      })
+    })
+  }
+
   addMyCard(info){
     console.log(info)
     return fetch(`${this._url}/cards`, {
@@ -25,7 +35,8 @@ export default class Api {
       method: 'POST',
       body: JSON.stringify({
         name: info.name,
-        link: info.link
+        link: info.link,
+        /* id: info.owner._idф */
       })
     })
   }

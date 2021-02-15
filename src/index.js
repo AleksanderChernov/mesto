@@ -6,21 +6,51 @@ import Section from '../src/components/Section.js';
 import PopupWithForm from '../src/components/PopupWithForm.js';
 import PopupWithImage from '../src/components/PopupWithImage.js';
 import UserInfo from '../src/components/UserInfo.js';
+import DeletionModal from '../src/components/DeletionModal.js';
 import Api from '../src/components/Api.js';
 
 import {initialCards, config, options, formElementProfile, formElementPlaces, profilePopupOpenButton, profilePlacesOpenButton,
-profilePopup, profileAvatarOpenButton, cardPopup, imagePopup, nameInput, jobInput, profileName, profileOccupation, template, section, formElementAvatar, avatarPopup, profileAvatar} from '../src/utils/constants.js';
+profilePopup, profileAvatarOpenButton, cardPopup, imagePopup, nameInput, jobInput, profileName, profileOccupation, template, section, formElementAvatar, avatarPopup, profileAvatar, avatarInput, avatarScr, formDeleteCard, deletionPopup} from '../src/utils/constants.js';
 
 const modalImagePopup = new PopupWithImage(imagePopup);
 modalImagePopup.setEventListeners();
 
+const modalDeleteCard = new DeletionModal(deletionPopup);
+modalDeleteCard.setEventListeners();
+
 /* Работаем с профилем */
-const userInfoObject = new UserInfo({nameSelector: profileName, occupationSelector: profileOccupation});
+const userInfoObject = new UserInfo({nameSelector: profileName, occupationSelector: profileOccupation, avatarSelector: avatarScr});
 
 /* Вызов API */
 const apiCall = new Api(options);
+
+let userId = null;
+
+/* Обновим инфу */
+function renewInfo() {
+  apiCall.getMyProfileInfo()
+  .then(info => {
+    userId = info._id;
+    userInfoObject.setUserInfo({newName: info.name, newJob: info.about, newAvatar: info.avatar})}
+  )
+}
+renewInfo();
+
 apiCall.getMyProfileInfo()
-.then(info => userInfoObject.setUserInfo({newName: info.name, newJob: info.about}))
+.then(info => console.log(info))
+
+apiCall.getInitialCards()
+.then(cards => {cardList.renderItems(cards)})
+
+/* Работаем с аватаркой */
+const avatarForm = new PopupWithForm(avatarPopup, {
+  handleFormSubmit: (info) => {
+    apiCall.changeAvatar(info.avatar)
+    .then((info)=>{userInfoObject.setUserInfo({newAvatar: info.avatar})})
+    .then(renewInfo())}
+  },
+  profileAvatar);
+avatarForm.setEventListeners();
 
 /* Секция для карточек + стартовые */
 const cardList = new Section({
@@ -29,35 +59,25 @@ const cardList = new Section({
 section);
 
 /* Создание карт */
-function recreateNewCard (item){
-  const card = new Card(item, template, ()=>{
-    modalImagePopup.open(item);
-  });
+function recreateNewCard(item) {
+  const card = new Card(item, userId, template, apiCall, deletionPopup, ()=>{
+    modalImagePopup.open(item)}, ()=>{modalDeleteCard.open()});
   const cardElement = card.generateCard();
   cardList.addItem(cardElement);
 }
-
-apiCall.getInitialCards()
-.then(cards => {cardList.renderItems(cards)})
 
 /* Работаем с профилем */
 const profileForm = new PopupWithForm(profilePopup, {
   handleFormSubmit: (inputValues) => {
     userInfoObject.setUserInfo({
       newName: inputValues.nameInput,
-      newJob: inputValues.jobInput
+      newJob: inputValues.jobInput,
+      newAvatar: avatarScr.src
     })
     userInfoObject.updateUserInfo();
   }
 })
 profileForm.setEventListeners();
-
-/* Работаем с аватаркой */
-const avatarForm = new PopupWithForm(avatarPopup, {
-  handleFormSubmit: (item) => {recreateNewCard (item)},
-  },
-  profileAvatar);
-avatarForm.setEventListeners();
 
 /* Создаем новые карточки */
 const placesForm = new PopupWithForm(cardPopup, {
@@ -69,10 +89,6 @@ const placesForm = new PopupWithForm(cardPopup, {
   section);
 
 placesForm.setEventListeners();
-
-  /* apiCall.addMyCard(cardElement)
-  .then(element=>{cardList.renderItems(element)}) */
-
 
 /* Валидируем профиль */
 const profileChecker = new Validation(config, formElementProfile);

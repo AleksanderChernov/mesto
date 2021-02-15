@@ -2,6 +2,7 @@
 export const formElementProfile = document.querySelector('.popup__form_profile');
 export const formElementPlaces = document.querySelector('.popup__form_places');
 export const formElementAvatar = document.querySelector('.popup__form_avatar');
+export const formDeleteCard = document.querySelector('.popup__form_delete');
 
 /* Переключение блоков */
 export const profilePopupOpenButton = document.querySelector('.profile__edit-button');
@@ -24,8 +25,14 @@ export const cardPopup = document.querySelector('.popup_places');
 /* Картинка-Попап */
 export const imagePopup = document.querySelector('.popup_images');
 
+/* Попап удаления */
+export const deletionPopup = document.querySelector('.popup_delete');
+
 /* Поле аватара */
 export const avatarInput = document.querySelector('.popup__input_entity_avatar-url');
+
+/* Аватар в DOM */
+export const avatarScr = document.querySelector('.profile__avatar');
 
 /* Поля формы */
 export const nameInput = document.querySelector('.popup__input_entity_name');
