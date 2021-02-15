@@ -36,9 +36,6 @@ function renewInfo() {
 }
 renewInfo();
 
-apiCall.getMyProfileInfo()
-.then(info => console.log(info))
-
 apiCall.getInitialCards()
 .then(cards => {cardList.renderItems(cards)})
 
