@@ -26,7 +26,21 @@ export default class Api {
       body: JSON.stringify({
         avatar: avatar,
       }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(
+        `Что-то пошло не так в changeAvatar: ${res.status}`
+      );
     });
+  }
+
+  deleteCard(id) {
+    return fetch(`${this._url}/cards/${id}`, {
+      headers: this._headers,
+      method: "DELETE",
+    })
   }
 
   likeCard(id) {
@@ -53,6 +67,20 @@ export default class Api {
     });
   }
 
+  updateUserInfo({name, about}) {
+    fetch('https://mesto.nomoreparties.co/v1/cohort-20/users/me', {
+      method: 'PATCH',
+    headers: {
+      authorization: 'd54a52cd-17ec-46b8-88b8-d32012d30e47',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name: name,
+      about: about
+    })
+  });
+  }
+
   addMyCard(info) {
     console.log(info);
     return fetch(`${this._url}/cards`, {
@@ -61,8 +89,7 @@ export default class Api {
       body: JSON.stringify({
         name: info.name,
         link: info.link,
-        /* id: info.owner._idф */
-      }),
+      })
     });
   }
 

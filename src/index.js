@@ -24,6 +24,12 @@ const userInfoObject = new UserInfo({nameSelector: profileName, occupationSelect
 /* Вызов API */
 const apiCall = new Api(options);
 
+function renderMainPage() {
+  apiCall.getInitialCards()
+  .then(cards => {cardList.renderItems(cards)})
+}
+renderMainPage();
+
 let userId = null;
 
 /* Обновим инфу */
@@ -36,14 +42,11 @@ function renewInfo() {
 }
 renewInfo();
 
-apiCall.getInitialCards()
-.then(cards => {cardList.renderItems(cards)})
-
 /* Работаем с аватаркой */
 const avatarForm = new PopupWithForm(avatarPopup, {
   handleFormSubmit: (info) => {
     apiCall.changeAvatar(info.avatar)
-    .then((info)=>{userInfoObject.setUserInfo({newAvatar: info.avatar})})
+    .then((res)=>{avatarScr.src = res.avatar})
     .then(renewInfo())}
   },
   profileAvatar);
@@ -57,7 +60,7 @@ section);
 
 /* Создание карт */
 function recreateNewCard(item) {
-  const card = new Card(item, userId, template, apiCall, deletionPopup, ()=>{
+  const card = new Card(item, userId, template, apiCall, ()=>{
     modalImagePopup.open(item)}, ()=>{modalDeleteCard.open()});
   const cardElement = card.generateCard();
   cardList.addItem(cardElement);
@@ -70,8 +73,12 @@ const profileForm = new PopupWithForm(profilePopup, {
       newName: inputValues.nameInput,
       newJob: inputValues.jobInput,
       newAvatar: avatarScr.src
-    })
-    userInfoObject.updateUserInfo();
+    }),
+    apiCall.updateUserInfo({
+      name: inputValues.nameInput,
+      about: inputValues.jobInput,
+      newAvatar: avatarScr.src});
+    profileForm.close();
   }
 })
 profileForm.setEventListeners();
@@ -79,10 +86,10 @@ profileForm.setEventListeners();
 /* Создаем новые карточки */
 const placesForm = new PopupWithForm(cardPopup, {
   handleFormSubmit: (item) => {
-    recreateNewCard(item),
-    apiCall.addMyCard(item),
-    console.log(item)},
+    apiCall.addMyCard(item)
+    .then((answer)=>{recreateNewCard(answer)})
   },
+},
   section);
 
 placesForm.setEventListeners();
@@ -115,6 +122,7 @@ profilePlacesOpenButton.addEventListener('click', ()=> {
   placesForm.open();
 });
 
+/* Открываем форму аватарки */
 profileAvatarOpenButton.addEventListener('click', ()=>{
   avatarChecker.setButtonState(false);
   avatarForm.open();

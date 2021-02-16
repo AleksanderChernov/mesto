@@ -1,16 +1,16 @@
 import Popup from './Popup.js';
 
 export default class DeletionModal extends Popup {
-  constructor(popupSelector) {
+  constructor(popupSelector, deletionCallback) {
     super(popupSelector);
+    this._delete = deletionCallback;
   }
 
   setEventListeners(){
     super.setEventListeners();
     this._popup.addEventListener('submit', (evt)=>{
-
       evt.preventDefault();
-      console.log('Запускаем Модалку Удаления')
+      this._delete;
       this.close();
     })
   }
