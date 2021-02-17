@@ -1,0 +1,5 @@
+.cards__like-block {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}

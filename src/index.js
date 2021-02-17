@@ -5,49 +5,95 @@ import Validation from '../src/components/validation.js';
 import Section from '../src/components/Section.js';
 import PopupWithForm from '../src/components/PopupWithForm.js';
 import PopupWithImage from '../src/components/PopupWithImage.js';
-import UserInfo from '../src/components/UserInfo.js'
+import UserInfo from '../src/components/UserInfo.js';
+import DeletionModal from '../src/components/DeletionModal.js';
+import Api from '../src/components/Api.js';
 
-import {initialCards, config, formElementProfile, formElementPlaces, profilePopupOpenButton, profilePlacesOpenButton,
-profilePopup, cardPopup, imagePopup, nameInput, jobInput, profileName, profileOccupation, template, section} from '../src/utils/constants.js';
+import {initialCards, config, options, formElementProfile, formElementPlaces, profilePopupOpenButton, profilePlacesOpenButton,
+profilePopup, profileAvatarOpenButton, cardPopup, imagePopup, nameInput, jobInput, profileName, profileOccupation, template, section, formElementAvatar, avatarPopup, profileAvatar, avatarInput, avatarScr, formDeleteCard, deletionPopup} from '../src/utils/constants.js';
 
 const modalImagePopup = new PopupWithImage(imagePopup);
 modalImagePopup.setEventListeners();
 
-function recreateNewCard (item){
-  const card = new Card(item, template, ()=>{
-    modalImagePopup.open(item);
-  });
-  const cardElement = card.generateCard();
-  cardList.addItem(cardElement);
+const modalDeleteCard = new DeletionModal(deletionPopup);
+modalDeleteCard.setEventListeners();
+
+/* Работаем с профилем */
+const userInfoObject = new UserInfo({nameSelector: profileName, occupationSelector: profileOccupation, avatarSelector: avatarScr});
+
+/* Вызов API */
+const apiCall = new Api(options);
+
+function renderMainPage() {
+  apiCall.getInitialCards()
+  .then(cards => {cardList.renderItems(cards)})
 }
+renderMainPage();
+
+let userId = null;
+
+/* Обновим инфу */
+function renewInfo() {
+  apiCall.getMyProfileInfo()
+  .then(info => {
+    userId = info._id;
+    userInfoObject.setUserInfo({newName: info.name, newJob: info.about, newAvatar: info.avatar})}
+  )
+}
+renewInfo();
+
+/* Работаем с аватаркой */
+const avatarForm = new PopupWithForm(avatarPopup, {
+  handleFormSubmit: (info) => {
+    apiCall.changeAvatar(info.avatar)
+    .then((res)=>{avatarScr.src = res.avatar})
+    .then(avatarForm._isLoading(true))
+    .then(renewInfo())}
+  },
+  profileAvatar);
+avatarForm.setEventListeners();
 
 /* Секция для карточек + стартовые */
 const cardList = new Section({
-  items: initialCards,
   renderer: (item) => {recreateNewCard(item)},
   },
 section);
 
-cardList.renderItems();
+/* Создание карт */
+function recreateNewCard(item) {
+  const card = new Card(item, userId, template, apiCall, ()=>{
+    modalImagePopup.open(item)}, ()=>{modalDeleteCard.open()});
+  const cardElement = card.generateCard();
+  cardList.addItem(cardElement);
+}
 
 /* Работаем с профилем */
-const userInfoObject = new UserInfo({nameSelector: profileName, occupationSelector: profileOccupation});
-
 const profileForm = new PopupWithForm(profilePopup, {
   handleFormSubmit: (inputValues) => {
     userInfoObject.setUserInfo({
       newName: inputValues.nameInput,
-      newJob: inputValues.jobInput
+      newJob: inputValues.jobInput,
+      newAvatar: avatarScr.src
+    }),
+    apiCall.updateUserInfo({
+      name: inputValues.nameInput,
+      about: inputValues.jobInput
     })
+    .then(profileForm._isLoading(true))
   }
 })
 profileForm.setEventListeners();
 
 /* Создаем новые карточки */
 const placesForm = new PopupWithForm(cardPopup, {
-  handleFormSubmit: (item) => {recreateNewCard (item)},
+  handleFormSubmit: (item) => {
+    apiCall.addMyCard(item)
+    .then((answer)=>{recreateNewCard(answer)})
+    .then(placesForm._isLoading(true))
   },
+},
   section);
+
 placesForm.setEventListeners();
 
 /* Валидируем профиль */
@@ -57,6 +103,10 @@ profileChecker.enableValidation();
 /* Валидируем карточки */
 const placesChecker = new Validation(config, formElementPlaces);
 placesChecker.enableValidation();
+
+/* Валадируем аватар */
+const avatarChecker = new Validation(config, formElementAvatar);
+avatarChecker.enableValidation();
 
 /* Открываем форму профиля */
 profilePopupOpenButton.addEventListener('click', ()=>{
@@ -73,3 +123,10 @@ profilePlacesOpenButton.addEventListener('click', ()=> {
   placesChecker.setButtonState(false);
   placesForm.open();
 });
+
+/* Открываем форму аватарки */
+profileAvatarOpenButton.addEventListener('click', ()=>{
+  avatarChecker.setButtonState(false);
+  avatarForm.open();
+});
+
