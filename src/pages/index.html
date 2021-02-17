@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Aleksander Chernov">
   <title>Mesto</title>
 </head>
+
 <body class="page">
   <header class="header">
     <a class="header__link" href="#" target="_blank">
@@ -15,8 +17,9 @@
   <main class="content">
     <section class="profile" aria-label="Профиль">
       <div class="profile__wrapper">
-          <img class="profile__avatar" src="<%=require('../images/profile/profile_image.jpg')%>" alt="Ваш аватар" id="avatar">
-          <button class="profile__avatar_edit-button" type="button"></button>
+        <img class="profile__avatar" src="<%=require('../images/profile/profile_image.jpg')%>" alt="Ваш аватар"
+          id="avatar">
+        <button class="profile__edit-button-avatar" type="button"></button>
         <div class="profile__info">
           <div class="profile__name-box">
             <h1 class="profile__name" id="name">Жак-Ив Кусто</h1>
@@ -36,9 +39,11 @@
         <button class="popup__close-button" type="button"></button>
         <form class="popup__form popup__form_profile" action="nothing_for_now" name="popupFormProfile" novalidate>
           <h2 class="popup__title">Редактировать профиль</h2>
-          <input class="popup__input popup__input_entity_name" id="input-name" name="nameInput" type="text" value="" minlength="2" maxlength="40" required>
+          <input class="popup__input popup__input_entity_name" id="input-name" name="nameInput" type="text" value=""
+            minlength="2" maxlength="40" required>
           <span class="popup__error" id="input-name-error"></span>
-          <input class="popup__input popup__input_entity_occupation" id="input-occupation" name="jobInput" type="text" value="" minlength="2" maxlength="200" required>
+          <input class="popup__input popup__input_entity_occupation" id="input-occupation" name="jobInput" type="text"
+            value="" minlength="2" maxlength="200" required>
           <span class="popup__error" id="input-occupation-error"></span>
           <button class="popup__save-button" type="submit">Сохранить</button>
         </form>
@@ -49,9 +54,11 @@
         <button class="popup__close-button" type="button"></button>
         <form class="popup__form popup__form_places" action="nothing_for_now" name="popupFormPlaces" novalidate>
           <h2 class="popup__title">Новое место</h2>
-          <input class="popup__input popup__input_entity_place" id="place-input" name="name" type="text" value="" placeholder="Название" minlength="2" maxlength="30" required>
+          <input class="popup__input popup__input_entity_place" id="place-input" name="name" type="text" value=""
+            placeholder="Название" minlength="2" maxlength="30" required>
           <span class="popup__error" id="place-input-error"></span>
-          <input class="popup__input popup__input_entity_url" id="place-url" name="link" type="url" value="" placeholder="Ссылка на картинку" required>
+          <input class="popup__input popup__input_entity_url" id="place-url" name="link" type="url" value=""
+            placeholder="Ссылка на картинку" required>
           <span class="popup__error" id="place-url-error"></span>
           <button class="popup__save-button popup__save-button_place" type="submit">Сохранить</button>
         </form>
@@ -69,7 +76,8 @@
         <button class="popup__close-button" type="button"></button>
         <form class="popup__form popup__form_avatar" action="nothing_for_now" name="popupFormAvatar" novalidate>
           <h2 class="popup__title">Обновить аватар</h2>
-          <input class="popup__input popup__input_entity_avatar-url" id="avatar-url" name="avatar" type="url" value="" placeholder="Введите ссылку" required>
+          <input class="popup__input popup__input_entity_avatar-url" id="avatar-url" name="avatar" type="url" value=""
+            placeholder="Введите ссылку" required>
           <span class="popup__error" id="avatar-url-error"></span>
           <button class="popup__save-button popup__save-button_avatar" type="submit">Сохранить</button>
         </form>
@@ -95,15 +103,16 @@
     <article class="cards">
       <img class="cards__image" src="." alt=".">
       <button class="cards__delete-button" aria-label="Кнопка удалить" type="button"></button>
-        <div class="cards__info-block">
-          <h2 class="cards__title"></h2>
-          <div class="cards__like-block">
-            <button class="cards__like-button" aria-label="Кнопка лайк" type="button"></button>
-            <p class="cards__like-number">0</p>
-          </div>
+      <div class="cards__info-block">
+        <h2 class="cards__title"></h2>
+        <div class="cards__like-block">
+          <button class="cards__like-button" aria-label="Кнопка лайк" type="button"></button>
+          <p class="cards__like-number">0</p>
         </div>
+      </div>
     </article>
   </template>
 
 </body>
+
 </html>

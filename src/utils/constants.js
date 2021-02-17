@@ -7,7 +7,7 @@ export const formDeleteCard = document.querySelector('.popup__form_delete');
 /* Переключение блоков */
 export const profilePopupOpenButton = document.querySelector('.profile__edit-button');
 export const profilePlacesOpenButton = document.querySelector('.profile__add-button');
-export const profileAvatarOpenButton = document.querySelector('.profile__avatar_edit-button');
+export const profileAvatarOpenButton = document.querySelector('.profile__edit-button-avatar');
 export const popupCloseButtons = document.querySelectorAll('.popup__close-button');
 
 /* Avatar */
