@@ -47,6 +47,7 @@ const avatarForm = new PopupWithForm(avatarPopup, {
   handleFormSubmit: (info) => {
     apiCall.changeAvatar(info.avatar)
     .then((res)=>{avatarScr.src = res.avatar})
+    .then(avatarForm._isLoading(true))
     .then(renewInfo())}
   },
   profileAvatar);
@@ -76,9 +77,9 @@ const profileForm = new PopupWithForm(profilePopup, {
     }),
     apiCall.updateUserInfo({
       name: inputValues.nameInput,
-      about: inputValues.jobInput,
-      newAvatar: avatarScr.src});
-    profileForm.close();
+      about: inputValues.jobInput
+    })
+    .then(profileForm._isLoading(true))
   }
 })
 profileForm.setEventListeners();
@@ -88,6 +89,7 @@ const placesForm = new PopupWithForm(cardPopup, {
   handleFormSubmit: (item) => {
     apiCall.addMyCard(item)
     .then((answer)=>{recreateNewCard(answer)})
+    .then(placesForm._isLoading(true))
   },
 },
   section);

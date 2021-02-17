@@ -40,7 +40,12 @@ export default class Api {
     return fetch(`${this._url}/cards/${id}`, {
       headers: this._headers,
       method: "DELETE",
-    })
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Что-то пошло не так в deleteCard: ${res.status}`);
+    });
   }
 
   likeCard(id) {
@@ -68,17 +73,19 @@ export default class Api {
   }
 
   updateUserInfo({name, about}) {
-    fetch('https://mesto.nomoreparties.co/v1/cohort-20/users/me', {
+    return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
-    headers: {
-      authorization: 'd54a52cd-17ec-46b8-88b8-d32012d30e47',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      name: name,
-      about: about
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        about: about
     })
-  });
+  }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Что-то пошло не так в updateUserInfo: ${res.status}`);
+    });
   }
 
   addMyCard(info) {
@@ -90,6 +97,11 @@ export default class Api {
         name: info.name,
         link: info.link,
       })
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Что-то пошло не так в addMyCard: ${res.status}`);
     });
   }
 
