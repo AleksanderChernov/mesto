@@ -1,16 +1,16 @@
-import '../src/pages/index.css';
+import '../pages/index.css';
 
-import {Card} from './components/Card.js';
-import FormValidator from './components/FormValidator.js';
-import Section from '../src/components/Section.js';
-import PopupWithForm from '../src/components/PopupWithForm.js';
-import PopupWithImage from '../src/components/PopupWithImage.js';
-import UserInfo from '../src/components/UserInfo.js';
-import DeletionModal from '../src/components/DeletionModal.js';
-import Api from '../src/components/Api.js';
+import {Card} from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import UserInfo from '../components/UserInfo.js';
+import DeletionModal from '../components/DeletionModal.js';
+import Api from '../components/Api.js';
 
 import {initialCards, config, options, formElementProfile, formElementPlaces, profilePopupOpenButton, profilePlacesOpenButton,
-profilePopup, profileAvatarOpenButton, cardPopup, imagePopup, nameInput, jobInput, profileName, profileOccupation, template, section, formElementAvatar, avatarPopup, profileAvatar, avatarInput, avatarScr, formDeleteCard, deletionPopup} from '../src/utils/constants.js';
+profilePopup, profileAvatarOpenButton, cardPopup, imagePopup, nameInput, jobInput, profileName, profileOccupation, template, section, formElementAvatar, avatarPopup, profileAvatar, avatarInput, avatarScr, formDeleteCard, deletionPopup} from '../utils/constants.js';
 
 const modalImagePopup = new PopupWithImage(imagePopup);
 modalImagePopup.setEventListeners();
