@@ -12,6 +12,10 @@ export default class Section {
     this._container.innerHTML = '';
   }
 
+  prependItem(element) {
+    this._container.prepend(element);
+  }
+
   renderItems(items) {
     this._clear();
     this._items = items;
