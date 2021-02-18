@@ -16,7 +16,7 @@ class Card {
     this._template = template;
     this._api = api;
     this._showPopup = handleCardClick;
-    this._openTrashbinConfirmation = handleTrashbinClick;
+    this._handleTrashbin = handleTrashbinClick;
     this._like = this._like.bind(this);
   }
 
@@ -43,11 +43,15 @@ class Card {
       this._api.dislikeCard(this._cardId).then((res) => {
         this._likeCounter.textContent = res.likes.length;
         e.target.classList.remove("cards__like-button_pressed");
+      }).catch((err) => {
+        console.log(err);
       });
     } else {
       this._api.likeCard(this._cardId).then((res) => {
         this._likeCounter.textContent = res.likes.length;
         e.target.classList.add("cards__like-button_pressed");
+      }).catch((err) => {
+        console.log(err);
       });
     }
   }
@@ -55,6 +59,10 @@ class Card {
   _delete(e) {
     e.target.closest(".cards").remove();
     this._element = null;
+  }
+
+  returnCardID() {
+    return this._data._id;
   }
 
   _setEventListeners() {
@@ -68,7 +76,7 @@ class Card {
     /* Листенер на корзину-удаление */
     this._element
       .querySelector(".cards__delete-button")
-      .addEventListener("click", ()=>{this._openTrashbinConfirmation(this._api.deleteCard(this._cardId))});
+      .addEventListener("click", ()=>{this._handleTrashbin()});
 
     /* Листенер на лайк */
     this._element

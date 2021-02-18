@@ -5,18 +5,18 @@ export default class Api {
     this._myInfo = options.me;
   }
 
+  _checkResponse(res) {
+    if (res.ok) {
+        return res.json();
+      }
+    return Promise.reject(`Ошибка ${res.status}`);
+  }
+
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
       headers: this._headers,
       method: "GET",
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(
-        `Что-то пошло не так в getInitialCards: ${res.status}`
-      );
-    });
+    }).then(this._checkResponse)
   }
 
   changeAvatar(avatar) {
@@ -26,50 +26,28 @@ export default class Api {
       body: JSON.stringify({
         avatar: avatar,
       }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(
-        `Что-то пошло не так в changeAvatar: ${res.status}`
-      );
-    });
+    }).then(this._checkResponse)
   }
 
   deleteCard(id) {
     return fetch(`${this._url}/cards/${id}`, {
       headers: this._headers,
       method: "DELETE",
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Что-то пошло не так в deleteCard: ${res.status}`);
-    });
+    }).then(this._checkResponse)
   }
 
   likeCard(id) {
     return fetch(`${this._url}/cards/likes/${id}`, {
       headers: this._headers,
       method: "PUT",
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Что-то пошло не так в likeCard: ${res.status}`);
-    });
+    }).then(this._checkResponse)
   }
 
   dislikeCard(id) {
     return fetch(`${this._url}/cards/likes/${id}`, {
       headers: this._headers,
       method: "DELETE",
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Что-то пошло не так в dislikeCard: ${res.status}`);
-    });
+    }).then(this._checkResponse)
   }
 
   updateUserInfo({name, about}) {
@@ -80,16 +58,10 @@ export default class Api {
         name: name,
         about: about
     })
-  }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Что-то пошло не так в updateUserInfo: ${res.status}`);
-    });
+  }).then(this._checkResponse)
   }
 
   addMyCard(info) {
-    console.log(info);
     return fetch(`${this._url}/cards`, {
       headers: this._headers,
       method: "POST",
@@ -97,25 +69,13 @@ export default class Api {
         name: info.name,
         link: info.link,
       })
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Что-то пошло не так в addMyCard: ${res.status}`);
-    });
+    }).then(this._checkResponse)
   }
 
   getMyProfileInfo() {
     return fetch(`${this._url}/users/me`, {
       headers: this._headers,
       method: "GET",
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(
-        `Что-то пошло не так в getMyProfileInfo: ${res.status}`
-      );
-    });
+    }).then(this._checkResponse)
   }
 }
