@@ -56,9 +56,9 @@ class Card {
     }
   }
 
-  _delete(e) {
-    e.target.closest(".cards").remove();
-    this._element = null;
+  delete() {
+    this._element.remove();
+/*     this._element = null; */
   }
 
   returnCardID() {
