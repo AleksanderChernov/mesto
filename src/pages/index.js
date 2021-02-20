@@ -71,8 +71,11 @@ section);
 /* Коллбек удаления */
 const removeCard = (card) => {
   return () => {
-    console.log(card)
-    apiCall.deleteCard(card)
+    apiCall.deleteCard(card.returnCardID())
+    .then(()=>card.delete())
+    .catch((err) => {
+    console.log(err);
+  });
   }
 }
 
@@ -83,8 +86,8 @@ function recreateNewCard(item) {
       modalImagePopup.open(item)
     },
     ()=>{
-      modalDeleteCard.setEventListeners(removeCard(card.returnCardID()));
-      modalDeleteCard.open()
+      modalDeleteCard.setEventListeners();
+      modalDeleteCard.open(removeCard(card))
     });
   const cardElement = card.generateCard();
   return cardElement;
